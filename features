@@ -9,16 +9,16 @@ Removes the task permanently.
 Strike-through text, grey color, move it to completed section.
 ✔ 5. Form Validation
 
-Prevent empty tasks
+Prevent empty tasks ✔
 
-Show red border if blank
+Show red border if blank ✔
 
-Show error message
+Show error message ✔
 
 🟦 INTERMEDIATE FEATURES (Makes your project great)
-⭐ 6. LocalStorage Save
+⭐ 6. LocalStorage Save ✔
 Your tasks stay saved even after page refresh.
-⭐ 7. Search Task
+⭐ 7. Search Task ✔
 A search bar to filter tasks by text.
 ⭐ 8. Filter Buttons
 

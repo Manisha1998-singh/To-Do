@@ -1,14 +1,14 @@
 import React from "react";
 
 export default function Complete({
-  todos,
+  todo,
   toggleComplete,
   setEditingTodo,
   deleteToDo,
 }) {
   return (
-    <div className="w-full inline-block">
-      {todos.map((todo) => (
+    <div className="w-full inline-block h-80 overflow-y-scroll pr-2">
+      {todo.map((todo) => (
         <div
           key={todo.id}
           className="border-b border-gray-200  w-full gap-4 flex  justify-between py-2 mb-2">
@@ -18,6 +18,9 @@ export default function Complete({
               textDecoration: todo.Completed ? "line-through" : "none",
             }}>
             {todo.task}
+            <span className="text-gray-500 text-sm  w-full flex">
+              Added on: {todo.createdAt}
+            </span>
           </span>
           <div className="flex gap-4">
             <button

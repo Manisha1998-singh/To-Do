@@ -1,60 +1,139 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Add from "./Add";
 import Edit from "./Edit";
-import Complete from "./Complete";
+import Complete from "./Complete"; // Your item component
 import Delete from "./Delete";
+import Search from "./Search";
+import Button from "./Button";
 
 export default function Dashboard() {
-  const [toDos, setToDos] = useState([]);
   const [editingTodo, setEditingTodo] = useState(null);
+  const [searchText, setSearchText] = useState("");
+  const [filter, setFilter] = useState("all");
 
-  // Add new todo
+  const [todo, setToDos] = useState(() => {
+    const saved = localStorage.getItem("toDos");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todo", JSON.stringify(todo));
+  }, [todo]);
+
+  // Add Todo
   const addTodo = (task) => {
-    if (task.trim() === "") return; // prevent empty tasks
-    setToDos([...toDos, { id: Date.now(), task, Completed: false }]);
+    const now = new Date();
+    if (task.trim() === "") return;
+
+    setToDos([
+      ...todo,
+      {
+        id: Date.now(),
+        task,
+        Completed: false, // KEEP capital "C"
+        createdAt: now.toISOString(),
+      },
+    ]);
   };
 
-  // Update todo text
+  // Update Todo
   const upDateTodo = (id, newTask) => {
     setToDos(
-      toDos.map((todo) => (todo.id === id ? { ...todo, task: newTask } : todo))
+      todo.map((todo) => (todo.id === id ? { ...todo, task: newTask } : todo))
     );
-    setEditingTodo(null); // close edit after save
+    setEditingTodo(null);
   };
 
-  // Toggle complete status
+  // Toggle Complete
   const toggleComplete = (id) => {
     setToDos(
-      toDos.map((todo) =>
+      todo.map((todo) =>
         todo.id === id ? { ...todo, Completed: !todo.Completed } : todo
       )
     );
   };
 
-  // Delete todo
+  // Delete
   const deleteToDo = (id) => {
-    setToDos(toDos.filter((todo) => todo.id !== id));
+    setToDos(todo.filter((todo) => todo.id !== id));
   };
 
+  // 🔍 Apply Search + Filters Together
+  const filteredTodos = todo.filter((todo) =>
+    todo.task.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  // .filter((todo) => {
+  //   if (filter === "completed") return todo.Completed === true;
+  //   if (filter === "incomplete") return todo.Completed === false;
+
+  //   if (filter === "today") {
+  //     const today = new Date().toDateString();
+  //     return new Date(todo.createdAt).toDateString() === today;
+  //   }
+
+  //   return true; // "all"
+  // });
+
+  const filterButtons = filteredTodos.filter((todo) => {
+    if (filter === "completed") return todo.Completed === true;
+    if (filter === "incomplete") return todo.Completed === false;
+    if (filter === "today") {
+      const today = new Date().toDateString();
+      return new Date(todo.createdAt).toDateString() === today;
+    }
+    return true; // "all"
+  });
   return (
     <>
       <h1 className="text-center text-3xl font-semibold mb-4">My To Do List</h1>
+
       <div className="md:w-1/2 mx-auto">
         <div className="bg-white shadow-md rounded-lg p-6">
           <Add addTodo={addTodo} />
 
-          <ul>
-            <li className=" w-full py-4">
-              <Complete
-                todos={toDos}
-                toggleComplete={toggleComplete}
-                setEditingTodo={setEditingTodo}
-                deleteToDo={deleteToDo}
-              />
+          {/* Search Input */}
+          <Search searchText={searchText} setSearchText={setSearchText} />
 
-              <Edit editingTodo={editingTodo} upDateTodo={upDateTodo} />
-            </li>
+          {/* Filter Buttons */}
+          <div className="flex-1 mb-4  gap-4 flex">
+            <Button
+              onClick={() => setFilter("all")}
+              label="All"
+              active={filter === "all"}
+            />
+            <Button
+              onClick={() => setFilter("completed")}
+              label="Completed"
+              active={filter === "completed"}
+            />
+            <Button
+              onClick={() => setFilter("incomplete")}
+              label="Incomplete"
+              active={filter === "incomplete"}
+            />
+            <Button
+              onClick={() => setFilter("today")}
+              label="Today"
+              active={filter === "today"}
+            />
+          </div>
+          {/* Render Filtered Todos */}
+          <ul className="mt-4">
+            {filterButtons.length === 0 && (
+              <p className="text-center text-gray-400">No tasks found...</p>
+            )}
+
+            <Complete
+              todo={filterButtons} // <-- final filtered result
+              toggleComplete={toggleComplete}
+              deleteToDo={deleteToDo}
+              setEditingTodo={setEditingTodo}
+            />
           </ul>
+
+          {/* Edit Component */}
+          <Edit editingTodo={editingTodo} upDateTodo={upDateTodo} />
         </div>
       </div>
     </>
