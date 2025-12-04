@@ -12,12 +12,12 @@ export default function Dashboard() {
   const [filter, setFilter] = useState("all");
 
   const [todos, setToDos] = useState(() => {
-    const saved = localStorage.getItem("toDos");
+    const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("todo", JSON.stringify(todos));
+    localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   // Add Todo
@@ -64,17 +64,9 @@ export default function Dashboard() {
     todo.task.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  // .filter((todo) => {
-  //   if (filter === "completed") return todo.Completed === true;
-  //   if (filter === "incomplete") return todo.Completed === false;
-
-  //   if (filter === "today") {
-  //     const today = new Date().toDateString();
-  //     return new Date(todo.createdAt).toDateString() === today;
-  //   }
-
-  //   return true; // "all"
-  // });
+  const filterByPriority = (priority) => {
+    setFilter(priority);
+  };
 
   const filterButtons = filteredTodos.filter((todo) => {
     if (filter === "completed") return todo.Completed === true;
@@ -82,6 +74,9 @@ export default function Dashboard() {
     if (filter === "today") {
       const today = new Date().toDateString();
       return new Date(todo.createdAt).toDateString() === today;
+    }
+    if (filter === "High" || filter === "Medium" || filter === "Low") {
+      return todo.priority === filter;
     }
     return true; // "all"
   });
@@ -132,6 +127,7 @@ export default function Dashboard() {
               toggleComplete={toggleComplete}
               deleteToDo={deleteToDo}
               setEditingTodo={setEditingTodo}
+              filterByPriority={filterByPriority}
             />
           </ul>
 

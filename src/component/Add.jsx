@@ -13,7 +13,7 @@ export default function Add({ addTodo }) {
       return; // prevent empty tasks
     }
     setError(false);
-    addTodo(task);
+    addTodo(task, priority);
     setTask(""); // clear textarea
     setErrorMessage("");
   };
