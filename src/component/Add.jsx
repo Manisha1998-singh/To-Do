@@ -4,6 +4,7 @@ export default function Add({ addTodo }) {
   const [task, setTask] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [priority, setPriority] = useState("High");
 
   const handleAdd = () => {
     if (task.trim() === "") {
@@ -41,10 +42,19 @@ export default function Add({ addTodo }) {
 
         <button
           onClick={handleAdd}
+          value={priority}
           className="bg-blue-500 hover:bg-blue-700 
                             text-white font-bold py-2 px-4 rounded">
           Add
         </button>
+        <select
+          className="border px-2 py-1 rounded"
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}>
+          <option value="High">High Priority</option>
+          <option value="Medium">Medium Priority</option>
+          <option value="Low">Low Priority</option>
+        </select>
       </div>
     </>
   );

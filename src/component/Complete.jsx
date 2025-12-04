@@ -43,6 +43,19 @@ export default function Complete({
               Delete
             </button>
           </div>
+          <p className="text-sm text-gray-500">
+            Priority:
+            <span
+              className={
+                todo.priority === "High"
+                  ? "text-red-500 font-semibold"
+                  : todo.priority === "Medium"
+                  ? "text-yellow-600 font-semibold"
+                  : "text-green-600 font-semibold"
+              }>
+              {todo.priority}
+            </span>
+          </p>
         </div>
       ))}
     </div>

@@ -5,31 +5,32 @@ import Complete from "./Complete"; // Your item component
 import Delete from "./Delete";
 import Search from "./Search";
 import Button from "./Button";
-
+import Badges from "./Badges";
 export default function Dashboard() {
   const [editingTodo, setEditingTodo] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [filter, setFilter] = useState("all");
 
-  const [todo, setToDos] = useState(() => {
+  const [todos, setToDos] = useState(() => {
     const saved = localStorage.getItem("toDos");
     return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("todo", JSON.stringify(todo));
-  }, [todo]);
+    localStorage.setItem("todo", JSON.stringify(todos));
+  }, [todos]);
 
   // Add Todo
-  const addTodo = (task) => {
+  const addTodo = (task, priority) => {
     const now = new Date();
     if (task.trim() === "") return;
 
     setToDos([
-      ...todo,
+      ...todos,
       {
         id: Date.now(),
         task,
+        priority,
         Completed: false, // KEEP capital "C"
         createdAt: now.toISOString(),
       },
@@ -39,7 +40,7 @@ export default function Dashboard() {
   // Update Todo
   const upDateTodo = (id, newTask) => {
     setToDos(
-      todo.map((todo) => (todo.id === id ? { ...todo, task: newTask } : todo))
+      todos.map((todo) => (todo.id === id ? { ...todo, task: newTask } : todo))
     );
     setEditingTodo(null);
   };
@@ -47,7 +48,7 @@ export default function Dashboard() {
   // Toggle Complete
   const toggleComplete = (id) => {
     setToDos(
-      todo.map((todo) =>
+      todos.map((todo) =>
         todo.id === id ? { ...todo, Completed: !todo.Completed } : todo
       )
     );
@@ -55,11 +56,11 @@ export default function Dashboard() {
 
   // Delete
   const deleteToDo = (id) => {
-    setToDos(todo.filter((todo) => todo.id !== id));
+    setToDos(todos.filter((todo) => todo.id !== id));
   };
 
   // 🔍 Apply Search + Filters Together
-  const filteredTodos = todo.filter((todo) =>
+  const filteredTodos = todos.filter((todo) =>
     todo.task.toLowerCase().includes(searchText.toLowerCase())
   );
 
@@ -118,6 +119,8 @@ export default function Dashboard() {
               active={filter === "today"}
             />
           </div>
+
+          <Badges />
           {/* Render Filtered Todos */}
           <ul className="mt-4">
             {filterButtons.length === 0 && (
