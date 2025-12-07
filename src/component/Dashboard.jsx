@@ -6,11 +6,12 @@ import Delete from "./Delete";
 import Search from "./Search";
 import Button from "./Button";
 import Badges from "./Badges";
-export default function Dashboard() {
+import useDebounce from "./useDebounce";
+function Dashboard() {
   const [editingTodo, setEditingTodo] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [filter, setFilter] = useState("all");
-
+  const debouncedSearch = useDebounce(searchText, 600);
   const [todos, setToDos] = useState(() => {
     const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : [];
@@ -61,7 +62,7 @@ export default function Dashboard() {
 
   // 🔍 Apply Search + Filters Together
   const filteredTodos = todos.filter((todo) =>
-    todo.task.toLowerCase().includes(searchText.toLowerCase())
+    todo.task.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const filterByPriority = (priority) => {
@@ -121,6 +122,7 @@ export default function Dashboard() {
             {filterButtons.length === 0 && (
               <p className="text-center text-gray-400">No tasks found...</p>
             )}
+            <p>Searching for: {debouncedSearch}</p>
 
             <Complete
               todo={filterButtons} // <-- final filtered result
@@ -138,3 +140,4 @@ export default function Dashboard() {
     </>
   );
 }
+export default Dashboard;

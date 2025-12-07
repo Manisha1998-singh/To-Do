@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-export default function Add({ addTodo }) {
+function Add({ addTodo }) {
+  const inputRef = useRef();
   const [task, setTask] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -10,6 +11,7 @@ export default function Add({ addTodo }) {
     if (task.trim() === "") {
       setError(true);
       setErrorMessage("Task cannot be empty. Please enter a valid task.");
+      inputRef.current.focus();
       return; // prevent empty tasks
     }
     setError(false);
@@ -25,6 +27,7 @@ export default function Add({ addTodo }) {
       </div>
       <div className="flex mb-4">
         <textarea
+          ref={inputRef}
           placeholder="Enter your task"
           value={task}
           onChange={(e) => {
@@ -59,3 +62,4 @@ export default function Add({ addTodo }) {
     </>
   );
 }
+export default React.memo(Add);
