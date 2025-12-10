@@ -7,6 +7,7 @@ import Search from "./Search";
 import Button from "./Button";
 import Badges from "./Badges";
 import useDebounce from "./useDebounce";
+import DashboardItem from "./DashboardItem";
 function Dashboard() {
   const [editingTodo, setEditingTodo] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -135,6 +136,14 @@ function Dashboard() {
 
           {/* Edit Component */}
           <Edit editingTodo={editingTodo} upDateTodo={upDateTodo} />
+          <div className="mt-6">
+            <DashboardItem title="Task 1" description="Finish Tailwind setup" />
+            <DashboardItem
+              title="Task 2"
+              description="Implement dark mode toggle"
+            />
+            <DashboardItem title="Task 3" description="Build To-Do UI" />
+          </div>
         </div>
       </div>
     </>
