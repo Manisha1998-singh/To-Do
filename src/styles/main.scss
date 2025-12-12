@@ -1,0 +1,17 @@
+body.dark {
+  background-color: #1e2530;
+  .bg-gray-900,
+  button {
+    background-color: #1e2530;
+  }
+  .lbl-text-white,
+  button.text-white {
+    color: #fff;
+  }
+  .bg-dark-mode {
+    background-color: black;
+  }
+  .bg-transparent {
+    background-color: transparent;
+  }
+}

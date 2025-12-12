@@ -84,10 +84,12 @@ function Dashboard() {
   });
   return (
     <>
-      <h1 className="text-center text-3xl font-semibold mb-4">My To Do List</h1>
+      <h1 className="text-center text-3xl lbl-text-white font-semibold mb-4">
+        My To Do List
+      </h1>
 
-      <div className="md:w-1/2 mx-auto">
-        <div className="bg-white shadow-md rounded-lg p-6">
+      <div className="md:w-1/2 mx-auto ">
+        <div className="bg-white shadow-md rounded-lg p-6 bg-dark-mode">
           <Add addTodo={addTodo} />
 
           {/* Search Input */}

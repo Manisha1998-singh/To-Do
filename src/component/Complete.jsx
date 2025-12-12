@@ -16,7 +16,7 @@ export default function Complete({
           <div className="flex justify-between">
             {/* LEFT SIDE: Task + added date */}
             <span
-              className="inline-block flex-1"
+              className="inline-block flex-1 lbl-text-white"
               style={{
                 textDecoration: todo.Completed ? "line-through" : "none",
               }}>
@@ -30,17 +30,17 @@ export default function Complete({
             <div className="flex gap-4">
               <button
                 onClick={() => toggleComplete(todo.id)}
-                className="text-blue-500 hover:text-blue-700">
+                className="text-blue-500 bg-transparent hover:text-blue-700">
                 Complete
               </button>
               <button
                 onClick={() => setEditingTodo(todo)}
-                className="text-blue-500 hover:text-blue-700">
+                className="text-blue-500 hover:text-blue-700 bg-transparent">
                 Edit
               </button>
               <button
                 onClick={() => deleteToDo(todo.id)}
-                className="text-red-500 hover:text-red-700">
+                className="text-red-500 hover:text-red-700 bg-transparent">
                 Delete
               </button>
             </div>

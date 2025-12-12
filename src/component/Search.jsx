@@ -2,7 +2,7 @@ import React from "react";
 
 function Search({ searchText, setSearchText }) {
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md w-full mt-4 mb-4">
       <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
         <div className="grid place-items-center h-full w-12 text-gray-300">
           <svg
