@@ -26,7 +26,7 @@ function Add({ addTodo }) {
         <div>
           <p className=" text-red-700 mb-2">{errorMessage}</p>
         </div>
-        <div className="flex mb-4">
+        <div class="flex items-end mb-4 gap-2">
           <textarea
             ref={inputRef}
             placeholder="Enter your task"
@@ -43,22 +43,23 @@ function Add({ addTodo }) {
     }
   `}
           />
-
-          <button
-            onClick={handleAdd}
-            value={priority}
-            className="bg-blue-500 hover:bg-blue-700 
-                            text-white font-bold py-2 px-4 rounded">
-            Add
-          </button>
-          <select
-            className="border px-2 py-1 rounded"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}>
-            <option value="High">High Priority</option>
-            <option value="Medium">Medium Priority</option>
-            <option value="Low">Low Priority</option>
-          </select>
+          <div className="flex border rounded">
+            <select
+              className=" px-2 py-1 "
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}>
+              <option value="High">High Priority</option>
+              <option value="Medium">Medium Priority</option>
+              <option value="Low">Low Priority</option>
+            </select>
+            <button
+              onClick={handleAdd}
+              value={priority}
+              className="bg-blue-500 hover:bg-blue-700 
+                            text-white font-bold py-2 px-4 ">
+              Add
+            </button>
+          </div>
         </div>
       </div>
     </>

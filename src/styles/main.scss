@@ -10,8 +10,19 @@ body.dark {
   }
   .bg-dark-mode {
     background-color: black;
+    border: 1px solid #ffffff;
   }
   .bg-transparent {
     background-color: transparent;
+  }
+  .bg-light-black {
+    background-color: #9eb5da;
+    border: 1px solid #ffffff;
+  }
+  .text-gray-300 {
+    color: oklch(0.37 0.03 257.82);
+  }
+  .text-gray-700 {
+    color: oklch(0.6 0.04 259.94);
   }
 }

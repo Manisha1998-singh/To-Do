@@ -12,6 +12,7 @@ function Dashboard() {
   const [editingTodo, setEditingTodo] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [filter, setFilter] = useState("all");
+  const [prioFilter, setPriofilter] = useState("High");
   const debouncedSearch = useDebounce(searchText, 600);
   const [todos, setToDos] = useState(() => {
     const saved = localStorage.getItem("todos");
@@ -69,6 +70,9 @@ function Dashboard() {
   const filterByPriority = (priority) => {
     setFilter(priority);
   };
+  const filterByBadges = (priority) => {
+    setPriofilter(priority);
+  };
 
   const filterButtons = filteredTodos.filter((todo) => {
     if (filter === "completed") return todo.Completed === true;
@@ -79,6 +83,9 @@ function Dashboard() {
     }
     if (filter === "High" || filter === "Medium" || filter === "Low") {
       return todo.priority === filter;
+    }
+    if (prioFilter) {
+      return todo.priority === prioFilter;
     }
     return true; // "all"
   });
@@ -119,9 +126,9 @@ function Dashboard() {
             />
           </div>
 
-          <Badges />
+          <Badges filterByBadges={filterByBadges} />
           {/* Render Filtered Todos */}
-          <ul className="mt-4">
+          <ul className="mt-4 transition-colors duration-300 shadow-md px-2 py-2  rounded-lg">
             {filterButtons.length === 0 && (
               <p className="text-center text-gray-400">No tasks found...</p>
             )}

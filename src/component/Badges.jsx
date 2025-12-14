@@ -1,15 +1,27 @@
 import React from "react";
 
-export default function Badges() {
+export default function Badges({ filterByBadges }) {
   return (
-    <div>
-      <span className="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 inset-ring inset-ring-pink-700/10">
+    <div className="flex gap-2">
+      <span
+        onClick={() => {
+          filterByBadges("High");
+        }}
+        className="cursor-pointer inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 inset-ring inset-ring-pink-700/10">
         High Priority
       </span>
-      <span className="inline-flex items-center rounded-md inset-ring bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 inset-ring-teal-700/10">
+      <span
+        onClick={() => {
+          filterByBadges("Medium");
+        }}
+        className="cursor-pointer inline-flex items-center rounded-md inset-ring bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 inset-ring-teal-700/10">
         Medium Priority
       </span>
-      <span className="inline-flex items-center rounded-md bg-teal-50 px-2 py-1 text-xs font-medium text-teal-700 inset-ring inset-ring-gray-700/10">
+      <span
+        onClick={() => {
+          filterByBadges("Low");
+        }}
+        className="cursor-pointer inline-flex items-center rounded-md bg-teal-50 px-2 py-1 text-xs font-medium text-teal-700 inset-ring inset-ring-gray-700/10">
         Low Priority
       </span>
 
