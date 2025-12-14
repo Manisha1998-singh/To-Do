@@ -9,18 +9,20 @@ Removes the task permanently.
 Strike-through text, grey color, move it to completed section.
 ✔ 5. Form Validation
 
-Prevent empty tasks ✔
+Prevent empty tasks ✔   
 
 Show red border if blank ✔
 
 Show error message ✔
+
+
 
 🟦 INTERMEDIATE FEATURES (Makes your project great)
 ⭐ 6. LocalStorage Save ✔
 Your tasks stay saved even after page refresh.
 ⭐ 7. Search Task ✔
 A search bar to filter tasks by text.
-⭐ 8. Filter Buttons
+⭐ 8. Filter Buttons  ✔
 
 All
 
@@ -30,7 +32,7 @@ Incomplete
 
 Today’s tasks
 
-⭐ 9. Priority Levels
+⭐ 9. Priority Levels ✔
 Add dropdown:
 
 High
@@ -44,7 +46,7 @@ Show priority badge (red/yellow/green).
 Allow users to add a deadline.
 ⭐ 11. Category / Tags
 Example: Work, Home, Personal, Study…
-⭐ 12. Dark / Light Mode
+⭐ 12. Dark / Light Mode ✔
 Toggle switch with Tailwind.
 ⭐ 13. Sort Options
 

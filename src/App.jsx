@@ -21,9 +21,6 @@ function App() {
         {darkMode ? "Light Mode" : "Dark Mode"}
       </button>
       <Dashboard /> {/* All components inside inherit dark mode via classes */}
-      <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg transition-colors duration-300">
-        <p className="text-gray-800 dark:text-gray-200">Dashboard item</p>
-      </div>
     </div>
   );
 }
